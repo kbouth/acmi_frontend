@@ -39,6 +39,12 @@ lappend Sources {"../hdl/support/gtwizard_0_common_reset.vhd" "VHDL 2008"}
 lappend Sources {"../hdl/support/gtwizard_0_cpll_railing.vhd" "VHDL 2008"}
 lappend Sources {"../hdl/support/gtwizard_0_gt_usrclk_source.vhd" "VHDL 2008"}
 lappend Sources {"../hdl/support/gtwizard_0_support.vhd" "VHDL 2008"}
+
+lappend Sources {"../hdl/clk_wiz_0.xcix" }
+lappend Sources {"../hdl/gtwizard_0.xcix" }
+lappend Sources {"../hdl/adc_gtp/adc_gtp.xci"}
+lappend Sources {"../hdl/adc_clk_wiz/adc_clk_wiz.xci"}
+
   lappend Sources {"../cstr/pins.xdc"  "XDC"} 
   lappend Sources {"../cstr/gtp.xdc"  "XDC"}     
   #lappend Sources {"../cstr/timing.xdc"  "XDC"} 
