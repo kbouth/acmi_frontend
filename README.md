@@ -1,4 +1,4 @@
-ACMI Frontend Platform - Chain A 
+ACMI Frontend Platform 
 
 Gateware for ACMI Frontend.  Uses custom Artix board as the hardware platform.   Communicates with withe ACMI backend hardware via fiber.  Responsible for all ACMI related safety tasks 
 
