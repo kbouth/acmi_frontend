@@ -42,12 +42,12 @@ generic(
     gtp_rx0_p               : in std_logic;
     gtp_rx0_n               : in std_logic;
     
-    -- adc to artix
-    adc_tx_p                : out std_logic;
-    adc_tx_n                : out std_logic; 
+    -- adc to artix 
+    adc_tx_p                : out std_logic; 
+    adc_tx_n                : out std_logic;
     adc_rx_p                : in std_logic; 
-    adc_rx_n                : in std_logic; 
- 
+    adc_rx_n                : in std_logic;
+    
     --test pulse signals    
     tp_pulse                : out std_logic_vector(7 downto 0);
     
@@ -146,6 +146,8 @@ architecture behv of top is
   signal gtp_tx_data        : std_logic_vector(31 downto 0);
   signal gtp_tx_data_enb    : std_logic;
   signal gtp_tx_clk         : std_logic;
+  
+  signal adc_rxdata         : std_logic_vector(15 downto 0); 
 
  
    --debug signals (connect to ila)
@@ -316,18 +318,21 @@ adc : entity work.adc_interface
     adc_data_2s => adc_data,
     adc_data_ob => dac_data,
     adc_clk => adc_clk,
-    adc_sat => adc_sat,
-    
-    
-    gtp_refclk_p => gtp_refclk1_p,
-    gtp_refclk_n => gtp_refclk1_n,
-    txp_out   => adc_tx_p,
-    txn_out   => adc_tx_n,
-    rxp_in    => adc_rx_p,
-    rxn_in    => adc_rx_n
+    adc_sat => adc_sat
   );
 
-
+    frontend: entity work.acmi_frontend
+        port map(
+            sys_clk => adc_clk,
+            reset => reset,
+            adc_rxdata   => adc_rxdata,
+            gtp_refclk_p => gtp_refclk1_p,
+            gtp_refclk_n => gtp_refclk1_n,
+            txp_out   => adc_tx_p,
+            txn_out   => adc_tx_n,
+            rxp_in    => adc_rx_p,
+            rxn_in    => adc_rx_n
+        ); 
 
 
 ---- calculates all metrics on beam and test pulses
