@@ -6,7 +6,7 @@ Uses the DESY FWK FPGA Firmware Framework https://fpgafw.pages.desy.de/docs-pub/
 
 Clone with --recurse-submodules to get the FWK repos
 
-git clone --recurse-submodules https://github.com/jamead/acmi-chaina
+git clone --recurse-submodules git@github.com:kbouth/acmi_frontend.git
 
 Setup Environment: make env (first time only)
 
