@@ -19,7 +19,26 @@ proc setSources {} {
   
   lappend Sources {"../hdl/top.vhd" "VHDL 2008"} 
   lappend Sources {"../hdl/acmi_package.vhd" "VHDL 2008"} 
+  lappend Sources {"../hdl/acmi_package.vhd" "VHDL 2008"}
+  lappend Sources {"../hdl/acmi_frontend.vhd" "VHDL 2008"}
+  lappend Sources {"../hdl/adc_gtp_link.vhd" "VHDL 2008"}
+  lappend Sources {"../hdl/adc_interface.vhd" "VHDL 2008"}
+  lappend Sources {"../hdl/adc_readout_test.vhd" "VHDL 2008"}
+  lappend Sources {"../hdl/backend_comm_wrapper.vhd" "VHDL 2008"}
+  lappend Sources {"../hdl/sfp_gtp.vhd" "VHDL 2008"}
 
+lappend Sources {"../hdl/support/adc_gtp_clock_module.vhd" "VHDL 2008"}
+lappend Sources {"../hdl/support/adc_gtp_common.vhd" "VHDL 2008"}
+lappend Sources {"../hdl/support/adc_gtp_common_reset.vhd" "VHDL 2008"}
+lappend Sources {"../hdl/support/adc_gtp_cpll_railing.vhd" "VHDL 2008"}
+lappend Sources {"../hdl/support/adc_gtp_gt_usrclk_source.vhd" "VHDL 2008"}
+lappend Sources {"../hdl/support/adc_gtp_support.vhd" "VHDL 2008"}
+lappend Sources {"../hdl/support/gtwizard_0_clock_module.vhd" "VHDL 2008"}
+lappend Sources {"../hdl/support/gtwizard_0_common.vhd" "VHDL 2008"}
+lappend Sources {"../hdl/support/gtwizard_0_common_reset.vhd" "VHDL 2008"}
+lappend Sources {"../hdl/support/gtwizard_0_cpll_railing.vhd" "VHDL 2008"}
+lappend Sources {"../hdl/support/gtwizard_0_gt_usrclk_source.vhd" "VHDL 2008"}
+lappend Sources {"../hdl/support/gtwizard_0_support.vhd" "VHDL 2008"}
   lappend Sources {"../cstr/pins.xdc"  "XDC"} 
   lappend Sources {"../cstr/gtp.xdc"  "XDC"}     
   #lappend Sources {"../cstr/timing.xdc"  "XDC"} 
