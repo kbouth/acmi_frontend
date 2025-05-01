@@ -37,10 +37,16 @@ generic(
     -- gtp to kria
     gtp_refclk1_p           : in std_logic;
     gtp_refclk1_n           : in std_logic;
-    --gtp_tx0_p               : out std_logic;
-    --gtp_tx0_n               : out std_logic;
-    --gtp_rx0_p               : in std_logic;
-    --gtp_rx0_n               : in std_logic;
+    gtp_tx0_p               : out std_logic;
+    gtp_tx0_n               : out std_logic;
+    gtp_rx0_p               : in std_logic;
+    gtp_rx0_n               : in std_logic;
+    
+    -- adc to artix
+    adc_tx_p                : out std_logic;
+    adc_tx_n                : out std_logic; 
+    adc_rx_p                : in std_logic; 
+    adc_rx_n                : in std_logic; 
  
     --test pulse signals    
     tp_pulse                : out std_logic_vector(7 downto 0);
@@ -290,27 +296,36 @@ keylock_detect_led <= not acis_keylock_debounced;
 
 
 ----configures and reads ADC
---adc : entity work.adc_interface
---  generic map (
---    SIM_MODE => SIM_MODE
---  )
---  port map (
---    reset => reset,
---    sclk => adc_spi_sck,                    
---    din => adc_spi_sdi, 
---    dout => adc_spi_sdo, 
---    sync => adc_spi_cs,     
---    adc_clk_p => adc_clk_p,
---    adc_clk_n => adc_clk_n,
---    adc_data_p => adc_data_p,
---    adc_data_n => adc_data_n,
---    adc_of_p => adc_of_p,
---    adc_of_n => adc_of_n,
---    adc_data_2s => adc_data,
---    adc_data_ob => dac_data,
---    adc_clk => adc_clk,
---    adc_sat => adc_sat
---  );
+adc : entity work.adc_interface
+  generic map (
+    SIM_MODE => SIM_MODE
+  )
+  port map (
+    reset => reset,
+    sclk => adc_spi_sck, 
+    trig => trig,                   
+    din => adc_spi_sdi, 
+    dout => adc_spi_sdo, 
+    sync => adc_spi_cs,     
+    adc_clk_p => adc_clk_p,
+    adc_clk_n => adc_clk_n,
+    adc_data_p => adc_data_p,
+    adc_data_n => adc_data_n,
+    adc_of_p => adc_of_p,
+    adc_of_n => adc_of_n,
+    adc_data_2s => adc_data,
+    adc_data_ob => dac_data,
+    adc_clk => adc_clk,
+    adc_sat => adc_sat,
+    
+    
+    gtp_refclk_p => gtp_refclk1_p,
+    gtp_refclk_n => gtp_refclk1_n,
+    txp_out   => adc_tx_p,
+    txn_out   => adc_tx_n,
+    rxp_in    => adc_rx_p,
+    rxn_in    => adc_rx_n
+  );
 
 
 
@@ -387,23 +402,23 @@ keylock_detect_led <= not acis_keylock_debounced;
 
 
 ---- GTP transceiver for fiber communication
---backend_gtp: entity work.backend_comm_wrapper
---  port map(
---    clk => adc_clk,
---    reset => reset, 
---    gtp_refclk_n => gtp_refclk1_n,
---    gtp_refclk_p => gtp_refclk1_p,
---    q0_clk0_refclk_out => gtp_refclk,
---    gtp_tx_data => gtp_tx_data,
---    gtp_tx_data_enb => gtp_tx_data_enb,
---    gtp_rx_clk => gtp_rx_clk,
---    gtp_rx_data => gtp_rx_data,
+backend_gtp: entity work.backend_comm_wrapper
+  port map(
+    clk => adc_clk,
+    reset => reset, 
+    gtp_refclk_n => gtp_refclk1_n,
+    gtp_refclk_p => gtp_refclk1_p,
+    q0_clk0_refclk_out => gtp_refclk,
+    gtp_tx_data => gtp_tx_data,
+    gtp_tx_data_enb => gtp_tx_data_enb,
+    gtp_rx_clk => gtp_rx_clk,
+    gtp_rx_data => gtp_rx_data,
 --    gtp_tx_clk => gtp_tx_clk,
---    RXN_IN  => gtp_rx0_n, 
---    RXP_IN => gtp_rx0_p, 
---    TXN_OUT => gtp_tx0_n, 
---    TXP_OUT => gtp_tx0_p
---);
+    RXN_IN  => gtp_rx0_n, 
+    RXP_IN => gtp_rx0_p, 
+    TXN_OUT => gtp_tx0_n, 
+    TXP_OUT => gtp_tx0_p
+);
 
 
 
